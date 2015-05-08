@@ -22,9 +22,10 @@ cn <- colnames(read.csv("household_power_consumption.txt",
 ## set column names
 colnames(hpc) <- cn
 
+hpc$Date <- as.Date(hpc$Date, format="%d/%m/%Y")
+
 ## Subset data 
-sub <- hpc[hpc$Date <= as.Date("2007-02-02") & 
-           hpc$Date >= as.Date("2007-02-01"),]
+sub <- hpc[hpc$Date <= as.Date("2007-02-02") & hpc$Date >= as.Date("2007-02-01"),]
 
 ## Format the date and time columns 
 sub$Date <- as.Date(sub$Date, format="%d/%m/%Y")
@@ -56,7 +57,7 @@ plot(sub$Time, sub$Voltage, type="l", xlab="datetime", ylab="Voltage")
 
 plot(sub$Time, sub$Global_reac, type="l", 
      xlab="datetime", 
-     ylab="Global_reactive_ppower")
+     ylab="Global_reactive_power")
 
 ## Close plotting device.
 dev.off()
